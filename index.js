@@ -11,6 +11,7 @@ const app = express();
 const corsOptions = {
   origin: 'https://course-project-itransition-frontend-omega.vercel.app',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  headers: ["Content-Type", "Authorization", "Origin", "Accept"],
 };
 
 app.use(cors(corsOptions));
