@@ -1,7 +1,7 @@
 const {Item} =require('../models/models')
 const ApiError = require('../error/ApiError')
 
-const extractItemDataFromRequest = (req) => {
+const extractItemDataFromRequest = (data) => {
     const {
         name, tags, custom_int1, custom_int2, custom_int3,
         custom_string1, custom_string2, custom_string3,
@@ -9,10 +9,10 @@ const extractItemDataFromRequest = (req) => {
         custom_boolean1, custom_boolean2, custom_boolean3,
         custom_date1, custom_date2, custom_date3,
         collection_id
-    } = req.body;
+    } = data;
 
     return {
-        name, tags, custom_int1, custom_int2, custom_int3,
+        name, tags: tags.split(' '), custom_int1, custom_int2, custom_int3,
         custom_string1, custom_string2, custom_string3,
         custom_text1, custom_text2, custom_text3,
         custom_boolean1, custom_boolean2, custom_boolean3,
@@ -25,7 +25,8 @@ class ItemController {
 
     async create(req, res, next) {
         try {
-            const itemData = extractItemDataFromRequest(req);
+            const itemData = extractItemDataFromRequest(req.body);
+            console.log(itemData)
             const item = await Item.create(itemData);
             return res.json(item);
         } catch (error) {
