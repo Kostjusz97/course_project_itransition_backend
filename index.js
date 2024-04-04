@@ -8,11 +8,14 @@ const errorHandler = require('./middleware/ErrorHandlingMiddleware');
 
 const app = express();
 
+const corsOptions = {
+  origin: 'https://course-project-itransition-frontend-omega.vercel.app',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cors({
-    origin: 'https://course-project-itransition-frontend-omega.vercel.app'
-    
-  }));
+
 app.use('/api', router);
 
 app.use(errorHandler)
