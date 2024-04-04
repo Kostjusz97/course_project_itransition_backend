@@ -9,7 +9,10 @@ const errorHandler = require('./middleware/ErrorHandlingMiddleware');
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin: 'https://course-project-itransition-frontend-omega.vercel.app'
+    
+  }));
 app.use('/api', router);
 
 app.use(errorHandler)
